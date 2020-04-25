@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" type="text/css" href="ExtStyle.css">
+
+        <script type="text/javascript">
+            function getFood() {
+                // create url based on search result
+                var foodName = document.getElementsByName("search")[0].value;
+                alert(foodName);
+                // TODO: REPLACE "banana" WITH STRING RESULT FROM SEARCH BAR
+
+
+
+                var url = "https://nutritionix-api.p.rapidapi.com/v1_1/search/" + foodName + "?fields=item_name%2Cnf_calories";
+                alert(url);
+                // set up the http request
+                request = new XMLHttpRequest();
+         
+                request.open("GET", url);
+                request.setRequestHeader("x-rapidapi-host", "nutritionix-api.p.rapidapi.com");
+                request.setRequestHeader("x-rapidapi-key", "cdbf67e9camshae4465fca35337bp17e0adjsnf3649b231466");
+                alert(request + "hi");
+
+
+                // check for successful connection to API
+                request.onreadystatechange = function() {
+                    console.log(request);
+             
+                    if (request.readyState == 4 && request.status == 200) {
+                        result = request.responseText;
+                        food = JSON.parse(result); 
+
+                        alert(result);
+                        alert(food);
+               
+
+                        if (food.total_hits <= 0) {
+                            // TODO: REPLACE line below, do something if food doesn't exist in API
+                            document.getElementById("data").innerHTML = "Sorry, food not found.";
+                            document.getElementById("dataCALORIES").innerHTML = ""; 
+                        } else {
+                            var name = food.hits[0].fields.item_name;
+                            var cal = food.hits[0].fields.nf_calories;
+                            // TODO: REPLACE line below, do something if food is found!
+                            document.getElementById("data").innerHTML = name; 
+                            document.getElementById("dataCALORIES").innerHTML = cal; 
+                        }
+                    }
+                }
+                // finish request, and we're done!
+                request.send();
+            }
+
+        </script>
+
+        <title></title>
+    </head>
+
+
+    <body>
+
+        <div class="container">
+            <div class="headercontainer">
+                <h1 class = "page-header">GROCERY CART</h1>
+
+            </div>
+
+        <div class="maincontent">
+
+        
+
+
+
+            <section class="section">
+                <h2 class="section-header">Log In</h2>
+                <form class="" action="index.html" method="post">
+
+                <div>
+                    <label for="usrname"><b>Username: </b></label>
+                    <input type="text" placeholder="Enter Username" name="username" required>
+                    <br>
+                    <label for="psswd"><b>Password: </b></label>
+                    <input type="password" placeholder="Enter Password" name="psswd" required>
+                    <br>
+                    <button type="submit" name="bttn">Log In</button>
+                    <label>
+                </div>
+                </form>
+            </section>
+
+            <br>
+            <br>
+
+        
+        <section class="section">
+            <h2 class="section-header">Your Cart</h2>
+
+            <label for="search"><b>Search for items</b></label>
+            <br>
+        <input type="text" placeholder="Search..." name="search">
+        <button onclick="getFood()">Search</button>
+
+        <br>
+        <br>
+
+            <table style="background-color: #F0F1F0">
+                <tr>
+                    <th>Items</th>
+                    <th>Calories</th>
+                </tr>
+                    <td name="ItemResult1" id="data"></td>
+                    <td name="ItemCalories" id="dataCALORIES"></td>
+            </table>
+            <br>
+
+            
+
+            <button type="submit">Add to Cart</button>
+    
+        <br>
+
+                <div class="box">
+
+                <table style="background-color: #F0F1F0">
+                    <tr>
+                        <th>Items</th>
+                        <th>Calories</th>
+                    </tr>
+                    <tr>
+                        <td value = "Apples">Applesss</td>
+                        <td value = "Calories">Caloriessss</td>
+                    </tr>
+
+                    <tr>
+                        <td value = "Bannanas">Bananaass</td>
+                        <td value = "Calories1">Caloriessss</td>
+                    </tr>
+
+                </table>
+
+                    </div>
+
+            </section>
+
+
+
+        </div>
+
+
+        </div>
+
+
+
+
+
+
+
+
+
+    </body> -->
+
+</html>
