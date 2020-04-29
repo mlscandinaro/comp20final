@@ -12,7 +12,9 @@ KNOWN ISSUES AS OF 4/28:
 
 TO DO:
 	- Add function to update list without adding ""
+	- Print list immediately upon login
 	- Add project to Heroku
+	- Clear items?
 */
 
 const http = require('http');
@@ -189,5 +191,4 @@ function logInUser(username, password) {
 		});
 	});
 }
-
 
