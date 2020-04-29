@@ -115,24 +115,24 @@ maya scandinaro
                     <button type="submit" name="logBttn">Log In</button>
                     <button type="submit" name="signUpBttn">Sign Up</button>
                 </form>
-            </section><br><br>
+            </section><br>
 
             <section class='section'>
                 <form method="get" action="http://localhost:8080">
-                    <label for="search"><b>Search Foods</b></label><br><br>
+                    <h2 class='section-header'>Search for Food Items</h2>
                     <input type="text" placeholder="Type any food here" name="search">
-                    <button type="button" onclick="getFood()">Get Calorie Count</button>
+                    <button type="button" onclick="getFood()">Get Calorie Count</button><br><br>
+                    <table style="background-color: #F0F1F0">
+                        <tr>
+                            <th>Item</th>
+                            <th>Calories</th>
+                        </tr>
+                            <td name="ItemResult1" id="data"></td>
+                            <td name="ItemCalories" id="dataCALORIES"></td>
+                    </table><br>
                     <input id="input1" type="submit" value="Add to Cart"/>
                     <input id="input1" type="submit" value="Print List" name="print"/>  
                 </form><br>
-                <table style="background-color: #F0F1F0">
-                    <tr>
-                        <th>Item</th>
-                        <th>Calories</th>
-                    </tr>
-                        <td name="ItemResult1" id="data"></td>
-                        <td name="ItemCalories" id="dataCALORIES"></td>
-                </table><br>
             </section>
 
             </div>
