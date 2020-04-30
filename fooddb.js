@@ -42,23 +42,32 @@ fs.readFile('./index.html', function (err,html) {
 		var signUp = qobj.signUpBttn;
 		if (signUp != null) {
 			console.log("PRESSED SIGN UP");
-			checkSignUp(username, password);
-			res.write("<script type='text/javascript'>alert('If sign up was succesful, you can now log in.");
-			res.write(" Otherwise, the username you requested may already be taken.');</script>");
+			if (username != null && password != null && username.length > 0 && password.length > 0) {
+				checkSignUp(username, password);
+				res.write("<script type='text/javascript'>alert('If sign up was succesful, you can now log in.");
+				res.write(" Otherwise, the username you requested may already be taken.');</script>");
+			} else {
+				res.write("<script type='text/javascript'>alert('Fill in both username and password.');</script>");
+			}
 		}
 		
 		// if user pressed log in button
 		var logIn = qobj.logBttn;
 		if (logIn != null) {
 			console.log("PRESSED LOG IN");
-			logInUser(username, password);
-			res.write("<script type='text/javascript'>alert('If log in was successful, you can add items and print list.");
-			res.write(" Otherwise, credentials may be incorrect, or you havent signed up yet.');</script>");
+			if (username != null && password != null && username.length > 0 && password.length > 0) {
+				logInUser(username, password);
+				res.write("<script type='text/javascript'>alert('If log in was successful, you can add items and print list.");
+				res.write(" Otherwise, credentials may be incorrect, or you havent signed up yet.');</script>");
+			} else {
+				res.write("<script type='text/javascript'>alert('Fill in both username and password.');</script>");
+			}
 		}
 
 		var logOut = qobj.logOutBttn;
 		if (logOut != null) {
 			loggedIn = false;
+			res.write("<script type='text/javascript'>alert('Logging out complete.');</script>");
 		}
 
 		// if logged in, adds item, else get alert
@@ -211,7 +220,5 @@ function clearList() {
 		});
 	});
 }
-
-
 
 
