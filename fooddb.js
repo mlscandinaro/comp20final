@@ -9,7 +9,8 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;  
-const mongoUrl = "mongodb+srv://mlscandinaro:chestnut1343@cluster0-fdofm.mongodb.net/test?retryWrites=true&w=majority";  
+const mongoUrl = "mongodb+srv://mlscandinaro:chestnut1343@cluster0-fdofm.mongodb.net/test?retryWrites=true&w=majority";
+var port = process.env.PORT || 3000;  
 
 // log in info
 var loggedIn = false;
@@ -18,7 +19,7 @@ var user;
 // grocery list info
 var list;
 
-fs.readFile('./final.html', function (err,html) {
+fs.readFile('./index.html', function (err,html) {
 	if (err) {
 		throw err;
 	}
@@ -89,7 +90,7 @@ fs.readFile('./final.html', function (err,html) {
 		}
 
 		res.end();
-	}).listen(8080);
+	}).listen(port);
 });
 
 // purpose: adds food to database and its associated username
