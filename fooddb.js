@@ -56,6 +56,11 @@ fs.readFile('./index.html', function (err,html) {
 			res.write(" Otherwise, credentials may be incorrect, or you havent signed up yet.');</script>");
 		}
 
+		var logOut = qobj.logOutBttn;
+		if (logOutBttn != null) {
+			loggedIn = false;
+		}
+
 		// if logged in, adds item, else get alert
 		if (foodName.length > 0 && item != null && loggedIn && print == null) {
 			addItem(item);
@@ -206,5 +211,7 @@ function clearList() {
 		});
 	});
 }
+
+
 
 
