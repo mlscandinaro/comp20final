@@ -1,0 +1,180 @@
+<!--------------
+index.html
+comp 20 final
+maya scandinaro
+4/23/20
+---------------->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="text/javascript">
+            function getFood() {
+                var foodName = document.getElementsByName("search")[0].value;
+                var url = "https://nutritionix-api.p.rapidapi.com/v1_1/search/" + foodName + "?fields=item_name%2Cnf_calories";
+
+                request = new XMLHttpRequest();
+                request.open("GET", url);
+                request.setRequestHeader("x-rapidapi-host", "nutritionix-api.p.rapidapi.com");
+                request.setRequestHeader("x-rapidapi-key", "cdbf67e9camshae4465fca35337bp17e0adjsnf3649b231466");
+
+                request.onreadystatechange = function() {
+                    console.log(request);
+                    if (request.readyState == 4 && request.status == 200) {
+                        result = request.responseText;
+                        food = JSON.parse(result);
+                        if (food.total_hits <= 0) {
+                            document.getElementById("data").innerHTML = "Sorry, food not found.";
+                            document.getElementById("dataCALORIES").innerHTML = "";
+                        } else {
+                            var name = food.hits[0].fields.item_name;
+                            var cal = food.hits[0].fields.nf_calories;
+                            document.getElementById("data").innerHTML = name;
+                            document.getElementById("dataCALORIES").innerHTML = cal;
+                        }
+                    }
+                }
+                request.send();
+            }
+        </script>
+        <style type="text/css">
+            body {
+              background-color: #3a4a58;
+              color: #5B5D67;
+              font-family: "Open Sans", Arial, Helvetica, sans-serif;
+              font-size: 17px;
+              font-weight: 400;
+              padding: 15px;
+              margin: 0;
+            }
+            .container {
+              max-width: 640px;
+              margin-left: auto;
+              margin-right: auto;
+            }
+            .headercontainer {
+                background-color: #64422E;
+                background-repeat: no-repeat;
+                text-align: center;
+            }
+            .page-header {
+              color: white;
+              display: inline-block;
+              vertical-align: baseline;
+              margin-top: 35px;
+              margin-bottom: 40px;
+              font-size: 2.7rem;
+              font-weight: 400;
+            }
+            .maincontent {
+                background-color: #3a4a58;
+            }
+            .section {
+              padding-top: 20px;
+              padding-left: 20px;
+              padding-right: 20px;
+              padding-bottom: 40px;
+              text-align: center;
+              background-color: white;
+            }
+            .section-header {
+              color: #75482E;
+              text-align: center;
+              font-weight: 400;
+              font-size: 1.5rem;
+              margin-top: 30px;
+              margin-bottom: 30px;
+            }
+            .section-subheader {
+                color: #75482E;
+                text-align: center;
+                font-weight: 400;
+                font-size: 1.5rem;
+                margin-top: 30px;
+                margin-bottom: 30px;
+            }
+            .box {
+                text-align: left;
+                padding: 30px 30px 20px 40px;
+            }
+            .buttonbox{
+                padding: 0px 30% 0px 0px;
+                text-align: right;
+
+            }
+            .buttonbox2{
+                padding: 0px 10% 0px 0px;
+                text-align: right;
+            }
+            table {
+              border: 2px solid #75482E;
+              width: 100%;
+              color: #424348;
+
+            }
+            th, td {
+              padding: 10px;
+              text-align: center;
+            }
+            tr:nth-child(odd) { background-color: #e5e8ed; }
+        </style>
+        <title>Comp 20 Final</title>
+    </head>
+    <body>
+        <div id="testDiv"></div>
+          <div class="container">
+            <div class="headercontainer">
+                <h1 class = "page-header"><b>GROCERY CART</b></h1></div>
+            <div class="maincontent">
+
+            <section class="section">
+                <p style="color: #996633"><i>Quick and easy calorie search for your next grocery shopping list. <br><br> Simply search for any food item to find out its calorie count. Add any desired items to your cart and recieve your next grocery list.  </i></p>
+            </section><br>
+
+            <section class="section">
+                <h2 class="section-header"><b>REGISTER / LOG IN</b></h2>
+                <p style="color: #996633"><i>Enter a username and password to start creating your next grocery list.</i></p>
+                <form method="get" action="http://localhost:8080">
+                    <label for="usrname"><b>Username: </b></label>
+                    <input type="text" placeholder="Enter Username..." name="username" required><br>
+                    <label for="psswd"><b>Password: </b></label>
+                    <input type="password" placeholder="Enter Password..." name="psswd" required><br><br>
+                    <div class="buttonbox">
+                    <button type="submit" name="signUpBttn">Register</button>
+                    <button type="submit" name="logBttn">Log In</button>
+                    </div>
+                </form>
+            </section><br>
+
+            <section class='section'>
+                <form method="get" action="http://localhost:8080">
+                    <h2 class='section-subheader'><b>SEARCH FOR FOOD ITEMS</b></h2>
+                    <input type="text" placeholder="Type in food item..." name="search">
+                    <button type="button" onclick="getFood()">Get Calorie Count</button><br>
+                        <p style="color: #996633"><i>Use <b> Get Calorie Count </b> to find out how many calories your item is. Add any desired items to your cart by clicking <b> Add to Cart</b>. Display your whole grocery list by clicking on <b>Print List</b>.</i></p>
+                        <br>
+                    <table style="background-color: white">
+                        <tr>
+                            <th style="width: 60%">Item</th>
+                            <th>Calories</th>
+                        </tr>
+                            <td name="ItemResult1" id="data"></td>
+                            <td name="ItemCalories" id="dataCALORIES"></td>
+                    </table><br>
+                    <div class="buttonbox2">
+                    <input id="input1" type="submit" value="Add to Cart"/>
+                    <input id="input1" type="submit" value="Print List" name="print"/>
+                    <input id="input1" type="submit" value="Clear List" name="clear"/>
+                </div>
+              </form><br>
+            </section>
+
+            </div>
+        </div>
+    </body>
+</html>
+
+
+
