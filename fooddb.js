@@ -57,7 +57,7 @@ fs.readFile('./index.html', function (err,html) {
 		}
 
 		var logOut = qobj.logOutBttn;
-		if (logOutBttn != null) {
+		if (logOut != null) {
 			loggedIn = false;
 		}
 
