@@ -9,7 +9,7 @@ const http = require('http');
 const url = require('url');
 const fs = require('fs');
 const MongoClient = require('mongodb').MongoClient;  
-const mongoUrl = "mongodb+srv://mlscandinaro:chestnut1343@cluster0-fdofm.mongodb.net/test?retryWrites=true&w=majority";
+const mongoUrl = "mongodb+srv://mlscandinaro:7Grry9bNULoaYcrK@cluster0-fdofm.mongodb.net/test?retryWrites=true&w=majority";
 var port = process.env.PORT || 3000;  
 
 // log in info
